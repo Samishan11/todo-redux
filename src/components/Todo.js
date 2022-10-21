@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTodos } from '../redux/action';
+import { getAllTodos, deleteTodo } from '../redux/action';
 import "bootstrap-icons/font/bootstrap-icons.css";
 const Todo = () => {
     const dispatch = useDispatch()
     const todos = useSelector(state => state.todos)
+  
     React.useEffect(() => {
         dispatch(getAllTodos())
     }, [])
@@ -51,13 +52,13 @@ const Todo = () => {
                             </li>
                             <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                                 <p className="lead me-5 fw-normal mb-0">
-                                    Buy groceries for next week
+                                 {data.name}
                                 </p>
                                 <p className="lead me-5 fw-normal mb-0">
-                                    Buy groceries for next week
+                                {data.age}
                                 </p>
                                 <p className="lead me-5 fw-normal mb-0">
-                                    Buy groceries for next week
+                                {data.desc}
                                 </p>
                             </li>
                             <li className="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
@@ -70,14 +71,8 @@ const Todo = () => {
                                     >
                                         <i className="bi bi-pencil me-3" />
                                     </a>
-                                    <a
-                                        href="#!"
-                                        className="text-danger"
-                                        data-mdb-toggle="tooltip"
-                                        title="Delete todo"
-                                    >
-                                        <i className="bi bi-trash-fill" />
-                                    </a>
+                                    <i onClick={()=>{dispatch(deleteTodo(data._id))}} className="bi bi-trash-fill" />
+
                                 </div>
                                 <div className="text-end text-muted">
                                     <a
