@@ -8,7 +8,7 @@ export const todoReducer = (state = [], action) => {
         case types.DELETE_TODO:
             return state.filter(todo => todo._id !== action.payload._id);
         case types.GET_A_TODO:
-            return state.map(todo => todo._id === action.payload._id && todo)
+            return state.map(todo => todo._id === action.payload._id ? todo.isClicked && !todo.isClicked :todo)
         case types.UPDATE_TODO:
             return state.map(todo => todo._id === action.payload._id ? [...state, action.payload] : todo);
         default:

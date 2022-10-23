@@ -42,7 +42,7 @@ export const deleteTodo = (id) => async (dispatch) => {
 }
 export const updateTodo = (id) => async (dispatch) => {
     try {
-        const res = await axios.delete(`${API_URL}/update/${id}`)
+        const res = await axios.put(`${API_URL}/update/${id}`)
         dispatch({ type: UPDATE_TODO, payload: res.data })
     } catch (error) {
         console.log(error)

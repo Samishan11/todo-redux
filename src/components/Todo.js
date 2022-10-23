@@ -5,10 +5,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 const Todo = () => {
     const dispatch = useDispatch()
     const todos = useSelector(state => state.todos)
-  
+
     React.useEffect(() => {
         dispatch(getAllTodos())
     }, [])
+
     return (
         <>
             <div className="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
@@ -52,13 +53,13 @@ const Todo = () => {
                             </li>
                             <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                                 <p className="lead me-5 fw-normal mb-0">
-                                 {data.name}
+                                    {data.name}
                                 </p>
                                 <p className="lead me-5 fw-normal mb-0">
-                                {data.age}
+                                    {data.age}
                                 </p>
                                 <p className="lead me-5 fw-normal mb-0">
-                                {data.desc}
+                                    {data.desc}
                                 </p>
                             </li>
                             <li className="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
@@ -69,9 +70,9 @@ const Todo = () => {
                                         data-mdb-toggle="tooltip"
                                         title="Edit todo"
                                     >
-                                        <i onClick={()=>{dispatch(getSingleTodos(data._id))}} className="bi bi-pencil me-3" />
+                                        <i onClick={() => { dispatch(getSingleTodos(data._id)) }} className="bi bi-pencil me-3" />
                                     </a>
-                                    <i onClick={()=>{dispatch(deleteTodo(data._id))}} className="bi bi-trash-fill" />
+                                    <i onClick={() => { dispatch(deleteTodo(data._id)) }} className="bi bi-trash-fill" />
 
                                 </div>
                                 <div className="text-end text-muted">
