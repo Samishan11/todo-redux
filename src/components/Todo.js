@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTodos, deleteTodo } from '../redux/action';
+import { getAllTodos, deleteTodo, getSingleTodos } from '../redux/action';
 import "bootstrap-icons/font/bootstrap-icons.css";
 const Todo = () => {
     const dispatch = useDispatch()
@@ -69,7 +69,7 @@ const Todo = () => {
                                         data-mdb-toggle="tooltip"
                                         title="Edit todo"
                                     >
-                                        <i className="bi bi-pencil me-3" />
+                                        <i onClick={()=>{dispatch(getSingleTodos(data._id))}} className="bi bi-pencil me-3" />
                                     </a>
                                     <i onClick={()=>{dispatch(deleteTodo(data._id))}} className="bi bi-trash-fill" />
 
