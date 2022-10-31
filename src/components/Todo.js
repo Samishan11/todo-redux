@@ -20,6 +20,9 @@ const Todo = () => {
     const [id, setIdd] = useState('')
     const editAble = (i) => {
         setIdd(todos[i]._id)
+        setNameee(todos[i].name)
+        setageee(todos[i].age)
+        setDesccc(todos[i].desc)
     }
 
     return (
@@ -145,16 +148,14 @@ const Todo = () => {
                                                 className="form-control form-control-lg"
                                                 id="exampleFormControlInput1"
                                                 placeholder="Enter desc"
-                                                defaultValue={desccc}
+                                                value={desccc}
                                                 onChange={e => setDesccc(e.target.value)}
                                             />
                                             <a href="#!" data-mdb-toggle="tooltip" title="Set due date">
                                                 <i className="fas fa-calendar-alt fa-lg me-3" />
                                             </a>
                                             <div>
-                                                <button onClick={()=>{dispatch(updateTodo(id, nameee, ageee, desccc))}} type="button" className="btn btn-primary">
-                                                    Edit
-                                                </button>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -162,7 +163,7 @@ const Todo = () => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save changes</button>
+                                <button type="button" onClick={()=>{dispatch(updateTodo(id, nameee, ageee, desccc))}} className="btn btn-primary">Edit</button>
                             </div>
                         </div>
                     </div>
