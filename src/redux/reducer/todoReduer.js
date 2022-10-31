@@ -5,14 +5,14 @@ export const todoReducer = (state = [], action) => {
             return [action.payload, ...state]
         case types.GET_ALL_TODO:
             return action.payload;
-        case types.GET_A_TODO:
-            return state.map(todo=> todo._id === action.payload ? console.log(todo) : console.log(null))
         case types.DELETE_TODO:
             return state.filter(todo =>  todo._id !== action.payload);
+            return action.payload
+        case types.GET_A_TODO:
+            return state.map(todo => todo._id === action.payload._id ? todo.isClicked && !todo.isClicked :todo)
         case types.UPDATE_TODO:
-            return state.map([...state, action.payload]);
+            return state.map(todo => todo._id === action.payload._id ? [...state, action.payload] : todo);
         default:
             return state;
     }
-
 }

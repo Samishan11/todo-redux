@@ -12,6 +12,7 @@ const Todo = () => {
         dispatch(getAllTodos())
     }, [])
 
+<<<<<<< HEAD
     const [name, setName] = useState('')
     const [age, setage] = useState('')
     const [desc, setDesc] = useState('')
@@ -20,6 +21,8 @@ const Todo = () => {
         setEditing(false)
     }
 
+=======
+>>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
     return (
         <>
             <div className="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
@@ -61,6 +64,7 @@ const Todo = () => {
                                     />
                                 </div>
                             </li>
+<<<<<<< HEAD
                             {
                                 edit ? <form>
                                     <div className="card-body">
@@ -110,6 +114,19 @@ const Todo = () => {
                                     </li>
                             }
 
+=======
+                            <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                                <p className="lead me-5 fw-normal mb-0">
+                                    {data.name}
+                                </p>
+                                <p className="lead me-5 fw-normal mb-0">
+                                    {data.age}
+                                </p>
+                                <p className="lead me-5 fw-normal mb-0">
+                                    {data.desc}
+                                </p>
+                            </li>
+>>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
                             <li className="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                 <div className="d-flex flex-row justify-content-end mb-1">
                                     <a
@@ -118,10 +135,14 @@ const Todo = () => {
                                         data-mdb-toggle="tooltip"
                                         title="Edit todo"
                                     >
+<<<<<<< HEAD
                                         <i onClick={() => {
                                             dispatch(getSingleTodos(data._id))
                                             setEditing(true)
                                         }} className="bi bi-pencil me-3" />
+=======
+                                        <i onClick={() => { dispatch(getSingleTodos(data._id)) }} className="bi bi-pencil me-3" />
+>>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
                                     </a>
                                     <i onClick={() => { dispatch(deleteTodo(data._id)) }} className="bi bi-trash-fill" />
 
