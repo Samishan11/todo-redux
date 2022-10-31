@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTodos, deleteTodo } from '../redux/action';
+import { getAllTodos, deleteTodo, getSingleTodos } from '../redux/action';
 import "bootstrap-icons/font/bootstrap-icons.css";
 const Todo = () => {
     const dispatch = useDispatch()
+
+    const [edit, setEditing] = React.useState(false)
     const todos = useSelector(state => state.todos)
-  
+
     React.useEffect(() => {
         dispatch(getAllTodos())
     }, [])
+
+    const [name, setName] = useState('')
+    const [age, setage] = useState('')
+    const [desc, setDesc] = useState('')
+
+    const submitForm = () => {
+        setEditing(false)
+    }
+
     return (
         <>
             <div className="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
@@ -50,17 +61,55 @@ const Todo = () => {
                                     />
                                 </div>
                             </li>
-                            <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                                <p className="lead me-5 fw-normal mb-0">
-                                 {data.name}
-                                </p>
-                                <p className="lead me-5 fw-normal mb-0">
-                                {data.age}
-                                </p>
-                                <p className="lead me-5 fw-normal mb-0">
-                                {data.desc}
-                                </p>
-                            </li>
+                            {
+                                edit ? <form>
+                                    <div className="card-body">
+                                        <div className="d-flex flex-row align-items-center">
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter name"
+                                                onChange={e => setName(e.target.value)}
+                                            />
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter age"
+                                                onChange={e => setage(e.target.value)}
+                                            />
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter desc"
+                                                onChange={e => setDesc(e.target.value)}
+                                            />
+                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date">
+                                                <i className="fas fa-calendar-alt fa-lg me-3" />
+                                            </a>
+                                            <div>
+                                                <button onClick={submitForm} type="button" className="btn btn-primary">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form> :
+                                    <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                                        <p className="lead me-5 fw-normal mb-0">
+                                            {data?.name}
+                                        </p>
+                                        <p className="lead me-5 fw-normal mb-0">
+                                            {data?.age}
+                                        </p>
+                                        <p className="lead me-5 fw-normal mb-0">
+                                            {data?.desc}
+                                        </p>
+                                    </li>
+                            }
+
                             <li className="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                 <div className="d-flex flex-row justify-content-end mb-1">
                                     <a
@@ -69,9 +118,12 @@ const Todo = () => {
                                         data-mdb-toggle="tooltip"
                                         title="Edit todo"
                                     >
-                                        <i className="bi bi-pencil me-3" />
+                                        <i onClick={() => {
+                                            dispatch(getSingleTodos(data._id))
+                                            setEditing(true)
+                                        }} className="bi bi-pencil me-3" />
                                     </a>
-                                    <i onClick={()=>{dispatch(deleteTodo(data._id))}} className="bi bi-trash-fill" />
+                                    <i onClick={() => { dispatch(deleteTodo(data._id)) }} className="bi bi-trash-fill" />
 
                                 </div>
                                 <div className="text-end text-muted">
