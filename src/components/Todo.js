@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTodos, deleteTodo, getSingleTodos } from '../redux/action';
+import { getAllTodos, deleteTodo, getSingleTodos, updateTodo } from '../redux/action';
 import "bootstrap-icons/font/bootstrap-icons.css";
 const Todo = () => {
     const dispatch = useDispatch()
 
-    const [edit, setEditing] = React.useState(false)
     const todos = useSelector(state => state.todos)
 
     React.useEffect(() => {
         dispatch(getAllTodos())
     }, [])
 
-<<<<<<< HEAD
-    const [name, setName] = useState('')
-    const [age, setage] = useState('')
-    const [desc, setDesc] = useState('')
+    
+    const [nameee, setNameee] = useState('')
+    const [ageee, setageee] = useState('')
+    const [desccc, setDesccc] = useState('')
 
-    const submitForm = () => {
-        setEditing(false)
+    // get edit data
+    const [id, setIdd] = useState('')
+    const editAble = (i) => {
+        setIdd(todos[i]._id)
     }
 
-=======
->>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
     return (
         <>
             <div className="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
@@ -49,9 +48,9 @@ const Todo = () => {
                 </a>
             </div>
             {
-                todos?.map(data => {
+                todos?.map((data, i) => {
                     return (
-                        <ul className="list-group list-group-horizontal rounded-0 bg-transparent">
+                        <ul key={i+1} className="list-group list-group-horizontal rounded-0 bg-transparent">
                             <li className="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
                                 <div className="form-check">
                                     <input
@@ -64,57 +63,7 @@ const Todo = () => {
                                     />
                                 </div>
                             </li>
-<<<<<<< HEAD
-                            {
-                                edit ? <form>
-                                    <div className="card-body">
-                                        <div className="d-flex flex-row align-items-center">
-                                            <input
-                                                type="text"
-                                                className="form-control form-control-lg"
-                                                id="exampleFormControlInput1"
-                                                placeholder="Enter name"
-                                                onChange={e => setName(e.target.value)}
-                                            />
-                                            <input
-                                                type="text"
-                                                className="form-control form-control-lg"
-                                                id="exampleFormControlInput1"
-                                                placeholder="Enter age"
-                                                onChange={e => setage(e.target.value)}
-                                            />
-                                            <input
-                                                type="text"
-                                                className="form-control form-control-lg"
-                                                id="exampleFormControlInput1"
-                                                placeholder="Enter desc"
-                                                onChange={e => setDesc(e.target.value)}
-                                            />
-                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date">
-                                                <i className="fas fa-calendar-alt fa-lg me-3" />
-                                            </a>
-                                            <div>
-                                                <button onClick={submitForm} type="button" className="btn btn-primary">
-                                                    Update
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form> :
-                                    <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                                        <p className="lead me-5 fw-normal mb-0">
-                                            {data?.name}
-                                        </p>
-                                        <p className="lead me-5 fw-normal mb-0">
-                                            {data?.age}
-                                        </p>
-                                        <p className="lead me-5 fw-normal mb-0">
-                                            {data?.desc}
-                                        </p>
-                                    </li>
-                            }
 
-=======
                             <li className="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                                 <p className="lead me-5 fw-normal mb-0">
                                     {data.name}
@@ -126,7 +75,6 @@ const Todo = () => {
                                     {data.desc}
                                 </p>
                             </li>
->>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
                             <li className="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                                 <div className="d-flex flex-row justify-content-end mb-1">
                                     <a
@@ -135,14 +83,8 @@ const Todo = () => {
                                         data-mdb-toggle="tooltip"
                                         title="Edit todo"
                                     >
-<<<<<<< HEAD
-                                        <i onClick={() => {
-                                            dispatch(getSingleTodos(data._id))
-                                            setEditing(true)
-                                        }} className="bi bi-pencil me-3" />
-=======
-                                        <i onClick={() => { dispatch(getSingleTodos(data._id)) }} className="bi bi-pencil me-3" />
->>>>>>> cff05490129b22b60324a01f6fdce25efb7063ea
+                                        <button onClick={editAble.bind(this, i)} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn-success bi bi-pencil me-3" />
+
                                     </a>
                                     <i onClick={() => { dispatch(deleteTodo(data._id)) }} className="bi bi-trash-fill" />
 
@@ -165,6 +107,68 @@ const Todo = () => {
                     )
                 })
             }
+
+            {/*  */}
+            <div>
+                {/* Button trigger modal */}
+
+                {/* Modal */}
+                <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="card-body">
+                                        <div className="d-flex flex-row align-items-center">
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter name"
+                                                value={nameee}
+                                                onChange={e => setNameee(e.target.value)}
+                                            />
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter age"
+                                                value={ageee}
+                                                onChange={e => setageee(e.target.value)}
+                                            />
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                id="exampleFormControlInput1"
+                                                placeholder="Enter desc"
+                                                defaultValue={desccc}
+                                                onChange={e => setDesccc(e.target.value)}
+                                            />
+                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date">
+                                                <i className="fas fa-calendar-alt fa-lg me-3" />
+                                            </a>
+                                            <div>
+                                                <button onClick={()=>{dispatch(updateTodo(id, nameee, ageee, desccc))}} type="button" className="btn btn-primary">
+                                                    Edit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </>
     )

@@ -8,7 +8,6 @@ export const addTodo = (name, age, desc) => async (dispatch) => {
         const res = await axios.post(`${API_URL}/post`, {
             name, age, desc
         })
-        console.log(name, age, desc)
         dispatch({ type: ADD_NEW_TODO, payload: res.data })
     } catch (error) {
         console.log(error)
@@ -17,7 +16,6 @@ export const addTodo = (name, age, desc) => async (dispatch) => {
 export const getAllTodos = () => async (dispatch) => {
     try {
         const res = await axios.get(`${API_URL}/get`)
-        console.log(res.data)
         dispatch({ type: GET_ALL_TODO, payload: res.data })
     } catch (error) {
         console.log(error)
@@ -40,9 +38,11 @@ export const deleteTodo = (id) => async (dispatch) => {
         console.log(error)
     }
 }
-export const updateTodo = (id) => async (dispatch) => {
+export const updateTodo = (id, name , age ,desc) => async (dispatch) => {
     try {
-        const res = await axios.put(`${API_URL}/update/${id}`)
+        const res = await axios.put(`${API_URL}/update/${id}` , {
+            name ,age ,desc
+        })
         dispatch({ type: UPDATE_TODO, payload: res.data })
     } catch (error) {
         console.log(error)
